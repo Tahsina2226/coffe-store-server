@@ -28,17 +28,17 @@ async function run() {
         await client.connect();
         console.log("Successfully connected to MongoDB!");
 
-        // Reference to database and collection
-        const database = client.db("coffeHouse"); // Database name: coffeHouse
-        const coffeeCollection = database.collection("coffee"); // Collection name: coffee
+
+        const database = client.db("coffeHouse");
+        const coffeeCollection = database.collection("coffee");
 
         // POST route to add coffee
         app.post('/coffee', async (req, res) => {
-            const newCoffee = req.body; // Get the new coffee data from the request body
+            const newCoffee = req.body;
             console.log('Adding new coffee:', newCoffee);
 
             try {
-                // Insert the new coffee into the database
+
                 const result = await coffeeCollection.insertOne(newCoffee);
                 res.status(201).send({ message: 'Coffee added successfully!', coffee: result });
             } catch (error) {
@@ -55,10 +55,10 @@ run().catch(console.dir);
 
 // Root route for testing
 app.get('/', (req, res) => {
-    res.send('Coffee-making server is running!'); // Response for the root route
+    res.send('Coffee-making server is running!');
 });
 
-// Start the server
+
 app.listen(port, () => {
-    console.log(`Coffee server is running on port: ${port}`); // Log server running status
+    console.log(`Coffee server is running on port: ${port}`);
 });
